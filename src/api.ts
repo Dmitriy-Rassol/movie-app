@@ -2,11 +2,11 @@
 import axios from 'axios';
 
 const API_KEY = 'QY0TAX2-YBS4Q13-HTQWW64-XF46TXF'; // Замените на ваш реальный API ключ
-const BASE_URL = 'https://api.kinopoisk.dev/v1.4/';
+const BASE_URL = 'https://api.kinopoisk.dev/v1.4/movie/';
 
 export const fetchSearchMovies = async (query: string) => {
   try {
-    const response = await axios.get(`${BASE_URL}movie/search`, {
+    const response = await axios.get(`${BASE_URL}search`, {
       params: {
         limit:50,
         page:1,
@@ -24,10 +24,11 @@ export const fetchSearchMovies = async (query: string) => {
 
 export const fetchMovies = async () => {
   try {
-    const response = await axios.get(`${BASE_URL}movie`, {
+    const response = await axios.get(`${BASE_URL}`, {
       params: {
         limit: 50,
         page:2,
+        notNullFields: 'poster.url,name',
         token: API_KEY,
       },
     });
@@ -37,3 +38,4 @@ export const fetchMovies = async () => {
     throw error;
   }
 };
+
