@@ -8,23 +8,19 @@
     <button @click="searchMovies">Искать</button>
     <div v-if="movies.length">
       <h2>Результаты поиска:</h2>
-      <ul>
-        <li v-for="movie in movies" :key="movie.id">
-         
-            {{ movie.name }} ({{ movie.year }})
+      <div>
+        <div v-for="movie in movies" :key="movie.id">
+            <div>{{ movie.name }} ({{ movie.year }})</div>
             <img :src="movie.poster.url" alt="" />
-          
-        </li>
-      </ul>
+        </div>
+      </div>
     </div>
     <div v-else>
       <ul>
-        <li v-for="movie in allMovies" :key="movie.id">
-          
-            {{ movie.name }} ({{ movie.year }})
-            <img :src="movie.poster.url" alt="" />
-         
-        </li>
+        <div v-for="movie in allMovies" :key="movie.id">
+          <div>{{ movie.name }} ({{ movie.year }})</div>
+          <img :src="movie.poster.url" alt="" />
+        </div>
       </ul>
     </div>
   </div>
@@ -32,7 +28,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from "vue";
-import { useMovieStore } from "../stores/movieStore"; // Импортируем хранилище
+import { useMovieStore } from "@stores/movieStore"; // Импортируем хранилище
 
 const movieStore = useMovieStore(); // Инициализируем хранилище
 const searchQuery = ref("");
