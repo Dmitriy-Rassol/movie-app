@@ -1,7 +1,7 @@
 
 // src/stores/movieStore.ts
 import { defineStore } from 'pinia';
-import { fetchSearchMovies, fetchMovies } from '../api';
+import { fetchSearchMovies, fetchMovies } from '@/api';
 
 export const useMovieStore = defineStore('movie', {
   state: () => ({

@@ -10,10 +10,13 @@ export const fetchSearchMovies = async (query: string) => {
       params: {
         limit: 50,
         page: 1,
-        notNullFields: "poster.url",
+        notNullFields: ["id","name","poster.url","description","ageRating"],
         query,
         token: API_KEY,
       },
+      paramsSerializer: {
+        indexes: null,
+      }
     });
     return response.data;
   } catch (error) {
@@ -28,9 +31,12 @@ export const fetchMovies = async () => {
       params: {
         limit: 50,
         page: 2,
-        notNullFields: "poster.url",
+        notNullFields: ["id","name","poster.url","description","ageRating"],
         token: API_KEY,
       },
+      paramsSerializer: {
+        indexes: null,
+      }
     });
     return response.data;
   } catch (error) {
