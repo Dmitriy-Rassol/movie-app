@@ -13,6 +13,7 @@ export const fetchSearchQuery = async (query: string) => {
         notNullFields: ["id","name","poster.url","year","description","ageRating"],
         sortField: "releaseYears.start",
         sortType: -1,
+        type: "movie",
         query,
         token: API_KEY,
       },
@@ -27,7 +28,7 @@ export const fetchSearchQuery = async (query: string) => {
   }
 };
 
-export const fetchMovies = async () => {
+export const fetchMovies = async (type:string = '') => {
   try {
     const response = await axios.get(`${BASE_URL}`, {
       params: {
@@ -36,6 +37,7 @@ export const fetchMovies = async () => {
         notNullFields: ["id","name","poster.url","year","description","ageRating"],
         sortField: "releaseYears.start",
         sortType: -1,
+        type: `${type}`,
         token: API_KEY,
       },
       paramsSerializer: {
