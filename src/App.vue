@@ -1,14 +1,21 @@
 <template>
-  <div id="app">
-    <MovieSearch />
+  <div >
+    <main >
+      <router-view v-slot="{ Component, route }">
+        <transition name="fade" mode="out-in">
+          <div :key="route.path">
+            <component :is="Component" />
+          </div>
+        </transition>
+      </router-view>
+    </main>
   </div>
 </template>
 
 <script setup lang="ts">
-import MovieSearch from '@components/MovieSearch.vue';
 
 </script>
 
-<style>
-/* Добавьте стили по вашему усмотрению */
+<style lang="scss">
+
 </style>
