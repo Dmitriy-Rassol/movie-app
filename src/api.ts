@@ -4,13 +4,15 @@ import axios from "axios";
 const API_KEY = "QY0TAX2-YBS4Q13-HTQWW64-XF46TXF"; // Замените на ваш реальный API ключ
 const BASE_URL = "https://api.kinopoisk.dev/v1.4/movie";
 
-export const fetchSearchMovies = async (query: string) => {
+export const fetchSearchQuery = async (query: string) => {
   try {
     const response = await axios.get(`${BASE_URL}/search`, {
       params: {
         limit: 50,
         page: 1,
-        notNullFields: ["id","name","poster.url","description","ageRating"],
+        notNullFields: ["id","name","poster.url","year","description","ageRating"],
+        sortField: "releaseYears.start",
+        sortType: -1,
         query,
         token: API_KEY,
       },
@@ -31,7 +33,9 @@ export const fetchMovies = async () => {
       params: {
         limit: 50,
         page: 2,
-        notNullFields: ["id","name","poster.url","description","ageRating"],
+        notNullFields: ["id","name","poster.url","year","description","ageRating"],
+        sortField: "releaseYears.start",
+        sortType: -1,
         token: API_KEY,
       },
       paramsSerializer: {

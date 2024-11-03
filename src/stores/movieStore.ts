@@ -1,7 +1,7 @@
 
 // src/stores/movieStore.ts
 import { defineStore } from 'pinia';
-import { fetchSearchMovies, fetchMovies } from '@/api';
+import { fetchSearchQuery, fetchMovies } from '@/api';
 
 export const useMovieStore = defineStore('movie', {
   state: () => ({
@@ -9,10 +9,10 @@ export const useMovieStore = defineStore('movie', {
     allMovies: [] as Array<{ id: number; name: string; year: number; poster: { url: string }}>,
   }),
   actions: {
-    async searchMovies(query: string) {
+    async searchQuery(query: string) {
       if (query.trim()) {
         try {
-          const data = await fetchSearchMovies(query);
+          const data = await fetchSearchQuery(query);
           console.log(data.docs);
           
           this.movies = data.docs; // Предполагаем, что данные находятся в docs
@@ -21,7 +21,7 @@ export const useMovieStore = defineStore('movie', {
         }
       }
     },
-    async fetchAllMovies () {
+    async fetchCollection () {
         try {
           const data = await fetchMovies();
           console.log(data.docs);
