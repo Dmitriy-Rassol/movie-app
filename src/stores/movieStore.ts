@@ -1,7 +1,7 @@
 
 // src/stores/movieStore.ts
 import { defineStore } from 'pinia';
-import { fetchSearchQuery, fetchMovies } from '@/api';
+import { fetchSearchQuery, fetchMoviesCollection } from '@/api';
 interface Movie {
   title: string;
   poster: {
@@ -19,8 +19,6 @@ export const useMovieStore = defineStore('movie', {
       if (query.trim()) {
         try {
           const data = await fetchSearchQuery(query);
-          console.log(data.docs);
-          
           this.movies = data.docs.filter((movie: Movie) => movie.poster && movie.poster.url !== null && movie.title !== null); // Предполагаем, что данные находятся в docs
         } catch (error) {
           console.error('Ошибка при поиске фильмов:', error);
@@ -29,10 +27,8 @@ export const useMovieStore = defineStore('movie', {
     },
     async fetchCollection (type:string = '') {
         try {
-          const data = await fetchMovies(type);
-          console.log(data.docs);
-          
-          this.allMovies = data.docs.filter((movie: Movie) => movie.poster && movie.poster.url !== null && movie.title !== null); // Предполагаем, что данные находятся в docs
+          const data = await fetchMoviesCollection(type);
+          this.movies = data.docs.filter((movie: Movie) => movie.poster && movie.poster.url !== null && movie.title !== null); // Предполагаем, что данные находятся в docs
         } catch (error) {
           console.error('Ошибка при поиске фильмов:', error);
         }

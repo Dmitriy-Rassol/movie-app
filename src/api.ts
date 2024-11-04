@@ -28,7 +28,7 @@ export const fetchSearchQuery = async (query: string) => {
   }
 };
 
-export const fetchMovies = async (type:string = '') => {
+export const fetchMoviesCollection = async (type:string = '') => {
   try {
     const response = await axios.get(`${BASE_URL}`, {
       params: {
