@@ -23,17 +23,10 @@
 import { ref, computed, onMounted } from "vue";
 import { useMovieStore } from "@stores/movieStore"; // Импортируем хранилище
 import MovieCard from "@/components/MovieCard.vue";
+import { categories } from "@/shared/constant";
 
 const movieStore = useMovieStore(); // Инициализируем хранилище
 const searchQuery = ref("");
-
-// Инициализация массива categories
-const categories = [
-  { type: "movie", label: "Фильмы" },
-  { type: "tv-series", label: "Сериалы" },
-  { type: "cartoon", label: "Мультфильмы" },
-  { type: "anime", label: "Аниме" },
-];
 
 onMounted(async () => {
   await movieStore.fetchCollection(); // Загружаем все фильмы при монтировании компонента
