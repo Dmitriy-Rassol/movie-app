@@ -5,12 +5,11 @@
       placeholder="Поиск фильмов"
       @keydown.enter="searchMovies"
     />
-    <button @click="searchMovies">Поиск</button>
 
-    <div v-for="(category, i) in categories" :key="i">
-      <button @click="searchCategories(category.type)">
-        {{ category.label }}
-      </button>
+    <Button @search="searchMovies" label="Поиск" />
+
+    <div v-for="(category, index) in categories" :key="index">
+      <Button @search="searchCategories(category.type)"  :label="category.label" />
     </div>
 
     <div v-if="movies.length">
@@ -20,13 +19,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from "vue";
-import { useMovieStore } from "@stores/movieStore"; // Импортируем хранилище
-import MovieCard from "@/components/MovieCard.vue";
-import { categories } from "@/shared/constant";
+import { ref, computed, onMounted } from 'vue';
+import { useMovieStore } from '@stores/movieStore'; // Импортируем хранилище
+import MovieCard from '@/components/MovieCard.vue';
+import Button from '@/components/Button.vue';
+import { categories } from '@/shared/constant';
 
 const movieStore = useMovieStore(); // Инициализируем хранилище
-const searchQuery = ref("");
+const searchQuery = ref('');
+const text = 'Поиск'; // Определяем текст для кнопки
 
 onMounted(async () => {
   await movieStore.fetchCollection(); // Загружаем все фильмы при монтировании компонента
@@ -34,7 +35,9 @@ onMounted(async () => {
 
 // Функция для поиска фильмов по запросу
 const searchMovies = async () => {
-  await movieStore.searchQuery(searchQuery.value); // Вызываем действие из хранилища
+  if (searchQuery.value.trim()) { // Проверяем, что запрос не пустой
+    await movieStore.searchQuery(searchQuery.value); // Вызываем действие из хранилища
+  }
 };
 
 // Функция для поиска фильмов по категории
@@ -48,4 +51,13 @@ const movies = computed(() => movieStore.movies || movieStore.allMovies);
 
 <style scoped lang="scss">
 /* Добавьте стили, если необходимо */
+input {
+  margin-bottom: 10px;
+  padding: 8px;
+  font-size: 16px;
+}
+
+button {
+  margin: 5px;
+}
 </style>
