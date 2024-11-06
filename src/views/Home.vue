@@ -21,13 +21,13 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
 import { useMovieStore } from '@stores/movieStore'; // Импортируем хранилище
+import { categories } from '@/shared/constant';
+
 import MovieCard from '@/components/MovieCard.vue';
 import Button from '@/components/Button.vue';
-import { categories } from '@/shared/constant';
 
 const movieStore = useMovieStore(); // Инициализируем хранилище
 const searchQuery = ref('');
-const text = 'Поиск'; // Определяем текст для кнопки
 
 onMounted(async () => {
   await movieStore.fetchCollection(); // Загружаем все фильмы при монтировании компонента
@@ -50,14 +50,5 @@ const movies = computed(() => movieStore.movies || movieStore.allMovies);
 </script>
 
 <style scoped lang="scss">
-/* Добавьте стили, если необходимо */
-input {
-  margin-bottom: 10px;
-  padding: 8px;
-  font-size: 16px;
-}
 
-button {
-  margin: 5px;
-}
 </style>

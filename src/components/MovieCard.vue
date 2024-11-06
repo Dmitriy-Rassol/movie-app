@@ -2,7 +2,7 @@
     <div>
       <div v-for="movie in props.movies" :key="movie.id">
         <div>
-          <img
+          <img class="w-48"
             v-if="movie.poster.url"
             :src="movie.poster.url"
             :alt="`${movie.name} poster`"
@@ -28,8 +28,6 @@
   </script>
   
   <style scoped lang="scss">
-  img {
-    width: 200px;
-  }
+
   </style>
   
