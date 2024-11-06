@@ -1,5 +1,6 @@
 export const content = [
-  './src/**/*.{html,js,vue}', // Убедитесь, что пути указаны правильно
+  './src/**/*.{html,js,ts,vue}',
+  './index.html',
 ];
 export const theme = {
   extend: {},

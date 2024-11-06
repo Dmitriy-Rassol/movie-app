@@ -7,13 +7,14 @@ export default defineConfig({
   plugins: [vue()],
   resolve: {
     alias: {
-      "@": resolve(__dirname, "src"),
-      "@components": resolve(__dirname, "src/components"),
-      "@assets": resolve(__dirname, "src/assets"),
-      "@stores": resolve(__dirname, "src/stores"),
+      "@": resolve(__dirname, "./src"),
+      "@components": resolve(__dirname, "./src/components"),
+      "@assets": resolve(__dirname, "./src/assets"),
+      "@stores": resolve(__dirname, "./src/stores"),
     },
   },
   server: {
     host: true,
   },
 });
+

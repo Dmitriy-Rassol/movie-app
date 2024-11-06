@@ -7,11 +7,17 @@
       "@components/*": ["src/components/*"],
       "@assets/*": ["src/assets/*"],
       "@stores/*": ["src/stores/*"]
-    },
+    }
   },
   "include": ["src/**/*"],
   "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
+    {
+      "path": "./tsconfig.app.json",
+      "disableOutputPath": true
+    },
+    {
+      "path": "./tsconfig.node.json",
+      "disableOutputPath": true
+    }
   ]
 }
